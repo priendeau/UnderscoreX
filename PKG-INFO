@@ -1,0 +1,60 @@
+Metadata-Version: 1.0
+Name: UnderscoreX
+Status: alpha
+Version: 0.0.1r001a-yusut-bozlon
+Summary: DecoratorClass used to parse **Kargs and handle Warning and exception thru Missing Attribute by adding static Decorator.
+Home-page: http://github.com/priendeau/UnderscoreX
+Author-email: <maxistedeams@gmail.com>
+Author: Patrick Riendeau
+Author-email: maxistedeams@gmail.com
+Maintainer: maxistedeams@gmail.com
+Maintainer-email: maxistedeams@gmail.com
+License: BSD NEW LICENCE
+Description: 
+_XDecoratorWrapper.py
+
+  DecoratorClass used to parse **Kargs and handle Warning and exception thru Missing Attribute by adding
+  @_XDecoratorWrapper.Kargs2AttrPreException and creating a function having this decorator being called:
+  @_XDecoratorWrapper.ObjectClassRaiser( ObjectAttributeHolder , ExceptionClass )
+
+
+This structure is intended for The developper developping pass-thru and conviviable method to 
+intercept attribut on demande by passing information from **kwargs or mutiple-string-chained argument.
+
+=========
+    This allow to build and easy model assuming you had readed the example. It offer a easy chaining method
+    Thru decorator to parse incoming information from **kwargs or any multi-chained string. Once you have 
+    defined a correct dictrionary of Attentend Attribute and Messages dedicated to inform the developper. 
+    It contains a mechanism to push into warning or error the missing attribute informaitons. Rather to
+    code individually all the missing attribute and condition, and exception class is provided as example.
+
+
+Installing
+==========
+  Under Development.
+  
+  You can download the latest versions released from <<No pypi for the moment, crude develpt and 
+  in correct stuff will cause problem and rejection, but maxistedeams will release it >>
+  or download the development version straight from the Github repository hosted by me at:
+  git://github.com/priendeau/UnderscoreX.git
+
+Documentation
+=============
+  Is currently lacking, about every method is documented in the source. But future prototype will
+  become move and more verbosis and Final realse will include test-case and a lot of documentation.
+
+
+  
+
+Platform: All, except illegal one.
+Classifier: Development Status :: 4 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Program engineering :: Development
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+
