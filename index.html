@@ -42,7 +42,7 @@
 <span class="name"><span class="mini-icon mini-icon-readme"></span> README.md</span><article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
 <a name="UnderscoreX" class="anchor" href="#UnderscoreX"><span class="mini-icon mini-icon-link"></span></a>UnderscoreX</h1>
 
-<p>Zenity Module with more option embedded for fast integration</p>
+<p>This structure is intended for The developper developping pass-thru and conviviable method to intercept attribut on demande by passing information from **kwargs or mutiple-string-chained argument.</p>
 
 <h1>
 <a name="example" class="anchor" href="#example"><span class="mini-icon mini-icon-link"></span></a>Example</h1>
@@ -51,9 +51,9 @@
         </p>
 
 <pre><code>  
-		Example
-		------------
-		Generic Exception class model:
+	Example
+	------------
+	Generic Exception class model:
 
         Basics
         ------
@@ -108,8 +108,8 @@
         class GenericTest( object ):
         
           MsgDict = {
-            'AppsName'        :'Internal Value AppsName not used, You should at least Specified an AppsName         Value.',
-            'ActionHelper'    :'Internal Value ActionHelper not used, You should at least Specified an         ActionHelper Value.',
+            'AppsName'        :'Internal Value AppsName not used, You should at least Specified an AppsName Value.',
+            'ActionHelper'    :'Internal Value ActionHelper not used, You should at least Specified an ActionHelper Value.',
             'HelperSwitch'    :'Internal Value HelperSwitch not used, You should at least Specified an HelperSwitch Value.',
           }  
 
@@ -155,7 +155,7 @@
           ExceptionGenericAttrMissing.MsgDict               = ItertAppsFilter.MsgDict
           Ainstance=GenericTest( AppsName=None, ActionHelper=None, HelperSwitch=None )
 
-        And We have Correct basic model of Attribute filtering thru the **kargs and will raise any Warning or         exception
+        And We have Correct basic model of Attribute filtering thru the **kargs and will raise any Warning or exception
         upon definition of your class inside the Object Raiser inside _XDecoratorWrapper :
         --------
         @_XDecoratorWrapper.ObjectClassRaiser( __ANY_EXCEPTION_OR_WARNING_OBJECT__ , ExceptionGenericAttrMissing )

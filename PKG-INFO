@@ -1,60 +1,86 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.1
 Name: UnderscoreX
-Status: alpha
 Version: 0.0.1r001a-yusut-bozlon
-Summary: DecoratorClass used to parse **Kargs and handle Warning and exception thru Missing Attribute by adding static Decorator.
-Home-page: http://github.com/priendeau/UnderscoreX
-Author-email: <maxistedeams@gmail.com>
 Author: Patrick Riendeau
-Author-email: maxistedeams@gmail.com
-Maintainer: maxistedeams@gmail.com
-Maintainer-email: maxistedeams@gmail.com
-License: BSD NEW LICENCE
-Description: 
-_XDecoratorWrapper.py
+Author-email: maxistedeams at gmail com, p_riendeau at live ca, rheault etccy at gmail com
+Maintainer: Maxiste Deams
+Maintainer-email: maxistedeams at gmail com, p_riendeau at live ca, rheault etccy at gmail com
+Home-page: http://github.com/priendeau/UnderscoreX
+Download-url: https://github.com/priendeau/UnderscoreX.git
+Summary: DecoratorClass used to parse **Kargs and handle Warning and exception thru Missing Attribute by adding static Decorator.
+License: Copyright (c) 2004-2012, Maxiste Deams, alis Patrick Riendeau.
+All rights reserved.
 
-  DecoratorClass used to parse **Kargs and handle Warning and exception thru Missing Attribute by adding
-  @_XDecoratorWrapper.Kargs2AttrPreException and creating a function having this decorator being called:
-  @_XDecoratorWrapper.ObjectClassRaiser( ObjectAttributeHolder , ExceptionClass )
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the <organization> nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
 
-
-This structure is intended for The developper developping pass-thru and conviviable method to 
-intercept attribut on demande by passing information from **kwargs or mutiple-string-chained argument.
-
-=========
-    This allow to build and easy model assuming you had readed the example. It offer a easy chaining method
-    Thru decorator to parse incoming information from **kwargs or any multi-chained string. Once you have 
-    defined a correct dictrionary of Attentend Attribute and Messages dedicated to inform the developper. 
-    It contains a mechanism to push into warning or error the missing attribute informaitons. Rather to
-    code individually all the missing attribute and condition, and exception class is provided as example.
-
-
-Installing
-==========
-  Under Development.
-  
-  You can download the latest versions released from <<No pypi for the moment, crude develpt and 
-  in correct stuff will cause problem and rejection, but maxistedeams will release it >>
-  or download the development version straight from the Github repository hosted by me at:
-  git://github.com/priendeau/UnderscoreX.git
-
-Documentation
-=============
-  Is currently lacking, about every method is documented in the source. But future prototype will
-  become move and more verbosis and Final realse will include test-case and a lot of documentation.
-
-
-  
-
-Platform: All, except illegal one.
-Classifier: Development Status :: 4 - Alpha
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Description: This structure is intended for The developper developping pass-thru and conviviable method to 
+        intercept attribut on demande by passing information from **kwargs or mutiple-string-chained argument.
+        
+                ------------
+            This allow to build and easy model assuming you had readed the example. It offer a easy chaining method
+            Thru decorator to parse incoming information from **kwargs or any multi-chained string. Once you have 
+            defined a correct dictrionary of Attentend Attribute and Messages dedicated to inform the developper. 
+            It contains a mechanism to push into warning or error the missing attribute informaitons. Rather to
+            code individually all the missing attribute and condition, and exception class is provided as example.
+        
+        
+        Installing
+        ==========
+                ------------
+          Under Development.
+          
+          You can download the latest versions released from <<No pypi for the moment, crude develpt and 
+          in correct stuff will cause problem and rejection, but maxistedeams will release it >>
+          or download the development version straight from the Github repository hosted by me at:
+          git://github.com/priendeau/UnderscoreX.git
+        
+        Documentation
+        =============
+          Is currently lacking, about every method is documented in the source. But future prototype will
+          become move and more verbosis and Final realse will include test-case and a lot of documentation.
+Platform: Windows
+Linux
+Unix
+Requires: sets
+Requires: iterpipes
+Provides: _XDecoratorWrapper
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Win32 (MS Windows)
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: BSD License
 Classifier: Natural Language :: English
-Classifier: Operating System :: OS Independent
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: Microsoft :: Windows :: Windows 7
+Classifier: Operating System :: Microsoft :: Windows :: Windows XP
+Classifier: Operating System :: Other OS
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: POSIX :: Other
 Classifier: Programming Language :: Python
-Classifier: Topic :: Program engineering :: Development
-Classifier: Environment :: Console
-Classifier: Intended Audience :: Developers
-Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: Implementation
+
 

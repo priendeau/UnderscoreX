@@ -290,7 +290,7 @@ class ExceptionGenericAttrMissing( Exception ):
         Exception.__init__( self, self.MsgDict[self.AttrCurrentExceptionHandled]  % ( self.AttrCurrentExceptionHandled ) )
     
 
-  @_XDecoratorWrapper.Kargs2Attr( ObjectWarningHolder )
+  @_XDecoratorWrapper.Kargs2Attr( ObjectGenericWarningHolder )
   def __init__( self, **Kargs ):
     if hasattr( self, 'ListAttrFuncAccess' ):
       print "Available message for following Attr:[ %s ]" % ( self.ListAttrFuncAccess ) 

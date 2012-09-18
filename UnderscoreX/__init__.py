@@ -12,3 +12,7 @@
 ### SureteDuQuebec_PublicDataSystem. 
 ### http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=SureteDuQuebec_PublicDataSystem
 ### 
+__version__ = '0.0.1r001a-yusut-bozlon'
+__package__ = 'UnderscoreX'
+__author_email__ = 'maxistedeams@gmail.com'
+__author__ = "Patrick Riendeau"

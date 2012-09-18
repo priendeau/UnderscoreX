@@ -29,112 +29,116 @@ Documentation
   become move and more verbosis and Final realse will include test-case and a lot of documentation.
 
 Example
-=============
-Generic Exception class model:
+=============::
+		Example
+		------------
+		Generic Exception class model:
 
-We need 2 Class to store attribute:
-
-class ObjectGenericWarningHolder( object ):
-
-  def __init__( self ):
-    print "Add Current Object Attribute %s" % self.__class__.__name__
-
-class ObjectGenericAttrHolder( object ):
-
-  def __init__( self ):
-    print "Add Current Object Attribute %s" % self.__class__.__name__
-
-
-We Need a Generic Exception class like this one.
-
-
-class ExceptionGenericAttrMissing( Exception ):
-  
-  msg                             ='__GENERIC_EXCEPTION_MESSAGES__'
-  AttrCurrentExceptionHandled     = None
-  HadDecoderTypeList              = False 
-
-  def __Init__Attr( self , value ):
-    self.AttrCurrentExceptionHandled = value
-    DictListTemplateKey="%sList" % ( value )
-    IsListTemplateKey="Had%sList" % ( value )
-    if hasattr( self, IsListTemplateKey  ):
-      if getattr( self, IsListTemplateKey ) == True:
-        Exception.__init__( self, self.MsgDict[DictListTemplateKey] % ( self.AttrCurrentExceptionHandled ,
+        Basics
+        ------
+        We need 2 Class to store attribute:
+        
+        class ObjectGenericWarningHolder( object ):
+        
+          def __init__( self ):
+            print "Add Current Object Attribute %s" % self.__class__.__name__
+        
+        class ObjectGenericAttrHolder( object ):
+        
+          def __init__( self ):
+            print "Add Current Object Attribute %s" % self.__class__.__name__
+        
+        
+        We Need a Generic Exception class like this one.
+        
+        
+        class ExceptionGenericAttrMissing( Exception ):
+          
+          msg                             ='__GENERIC_EXCEPTION_MESSAGES__'
+          AttrCurrentExceptionHandled     = None
+          HadDecoderTypeList              = False 
+        
+          def __Init__Attr( self , value ):
+            self.AttrCurrentExceptionHandled = value
+            DictListTemplateKey="%sList" % ( value )
+            IsListTemplateKey="Had%sList" % ( value )
+            if hasattr( self, IsListTemplateKey  ):
+              if getattr( self, IsListTemplateKey ) == True:
+                Exception.__init__( self, self.MsgDict[DictListTemplateKey] % ( self.AttrCurrentExceptionHandled ,
                                                                         getattr( self, DictListTemplateKey ) ) )
-      else:
-        Exception.__init__( self, self.MsgDict[self.AttrCurrentExceptionHandled]  % ( self.AttrCurrentExceptionHandled ) )
+              else:
+                Exception.__init__( self, self.MsgDict[self.AttrCurrentExceptionHandled]  % ( self.AttrCurrentExceptionHandled ) )
     
+        
+          @_XDecoratorWrapper.Kargs2Attr( ObjectWarningHolder )
+          def __init__( self, **Kargs ):
+            if hasattr( self, 'ListAttrFuncAccess' ):
+              print "Available message for following Attr:[ %s ]" % ( self.ListAttrFuncAccess ) 
+            self.RaisedExceptionByAttr = False
+            for ExceptionByAttr in self.ListAttrFuncAccess:
+              if hasattr( self, ExceptionByAttr ):
+                self.RaisedExceptionByAttr = True
+                getattr( self, "__Init__Attr")( ExceptionByAttr )
 
-  @_XDecoratorWrapper.Kargs2Attr( ObjectWarningHolder )
-  def __init__( self, **Kargs ):
-    if hasattr( self, 'ListAttrFuncAccess' ):
-      print "Available message for following Attr:[ %s ]" % ( self.ListAttrFuncAccess ) 
-    self.RaisedExceptionByAttr = False
-    for ExceptionByAttr in self.ListAttrFuncAccess:
-      if hasattr( self, ExceptionByAttr ):
-        self.RaisedExceptionByAttr = True
-        getattr( self, "__Init__Attr")( ExceptionByAttr )
+        ###
+        ### Main class:
+        ### 
 
-###
-### Main class:
-### 
+        class GenericTest( object ):
+        
+          MsgDict = {
+            'AppsName'        :'Internal Value AppsName not used, You should at least Specified an AppsName Value.',
+            'ActionHelper'    :'Internal Value ActionHelper not used, You should at least Specified an ActionHelper Value.',
+            'HelperSwitch'    :'Internal Value HelperSwitch not used, You should at least Specified an HelperSwitch Value.',
+          }  
 
-class GenericTest( object ):
+          OptionListDiscovery=list()
+          TempOptionList=list()
+          ErrorHandler = iterpipes.CalledProcessError
 
-  MsgDict = {
-    'AppsName'        :'Internal Value AppsName not used, You should at least Specified an AppsName Value.',
-    'ActionHelper'    :'Internal Value ActionHelper not used, You should at least Specified an ActionHelper Value.',
-    'HelperSwitch'    :'Internal Value HelperSwitch not used, You should at least Specified an HelperSwitch Value.',
-  }  
+          ListAttrFuncAccess        = [ 'AppsName', 'ActionHelper', 'HelperSwitch' ]
+          parser = OptionParser()
 
-  OptionListDiscovery=list()
-  TempOptionList=list()
-  ErrorHandler = iterpipes.CalledProcessError
-
-  ListAttrFuncAccess        = [ 'AppsName', 'ActionHelper', 'HelperSwitch' ]
-  parser = OptionParser()
-
-  def __start_cmdline_parser__( self ):
+          def __start_cmdline_parser__( self ):
     
-    self.parser.add_option("-A", "--AppsName",
-                      dest="StrAppsName",
-                      help="Add AppsName in your Class")
-    self.parser.add_option("-J", "--ActionHelper",
-                      dest="StrActionHelper",
-                      help="Add ActionHelper in your Class")
-    self.parser.add_option("-S", "--HelperSwitch",
-                      dest="StrHelperSwitch",
-                      help="Add HelperSwitch in your Class ")
+            self.parser.add_option("-A", "--AppsName",
+                              dest="StrAppsName",
+                              help="Add AppsName in your Class")
+            self.parser.add_option("-J", "--ActionHelper",
+                              dest="StrActionHelper",
+                              help="Add ActionHelper in your Class")
+            self.parser.add_option("-S", "--HelperSwitch",
+                              dest="StrHelperSwitch",
+                              help="Add HelperSwitch in your Class ")
 
 
-  @_XDecoratorWrapper.Kargs2AttrPreException( ObjectIterAppsFilter )
-  def __init__( self , **Kargs ):
-    self.__start_cmdline_parser__()
-    (self.options, self.args ) = self.parser.parse_args() 
-    self.ErrorRaiser( )
-### ...
+          @_XDecoratorWrapper.Kargs2AttrPreException( ObjectIterAppsFilter )
+          def __init__( self , **Kargs ):
+            self.__start_cmdline_parser__()
+            (self.options, self.args ) = self.parser.parse_args() 
+            self.ErrorRaiser( )
+        ### ...
 
 
-  @_XDecoratorWrapper.ObjectClassRaiser( ObjectGenericAttrHolder , ExceptionGenericAttrMissing )
-  def ErrorRaiser( self ):
-    print "Inspecting Missing Attribute."
+          @_XDecoratorWrapper.ObjectClassRaiser( ObjectGenericAttrHolder , ExceptionGenericAttrMissing )
+          def ErrorRaiser( self ):
+            print "Inspecting Missing Attribute."
 
 
 
-### Some Instantiation statement:
+        ### Some Instantiation statement:
 
-if __name__.__eq__( '__main__' ):
-  _XDecoratorWrapper.ErrorClassReceivedAttrListName = 'ListAttrFuncAccess'
-  ExceptionGenericAttrMissing.ListAttrFuncAccess    = ItertAppsFilter.ListAttrFuncAccess
-  ExceptionGenericAttrMissing.MsgDict               = ItertAppsFilter.MsgDict
-  Ainstance=GenericTest( AppsName=None, ActionHelper=None, HelperSwitch=None )
+        if __name__.__eq__( '__main__' ):
+          _XDecoratorWrapper.ErrorClassReceivedAttrListName = 'ListAttrFuncAccess'
+          ExceptionGenericAttrMissing.ListAttrFuncAccess    = ItertAppsFilter.ListAttrFuncAccess
+          ExceptionGenericAttrMissing.MsgDict               = ItertAppsFilter.MsgDict
+          Ainstance=GenericTest( AppsName=None, ActionHelper=None, HelperSwitch=None )
 
-And We have Correct basic model of Attribute filtering thru the **kargs and will raise any Warning or exception
-upon definition of your class inside the Object Raiser inside _XDecoratorWrapper :
---------
-@_XDecoratorWrapper.ObjectClassRaiser( __ANY_EXCEPTION_OR_WARNING_OBJECT__ , ExceptionGenericAttrMissing )
-def ErrorRaiser( self ):
- pass 
---------
+        And We have Correct basic model of Attribute filtering thru the **kargs and will raise any Warning or exception
+        upon definition of your class inside the Object Raiser inside _XDecoratorWrapper :
+        --------
+        @_XDecoratorWrapper.ObjectClassRaiser( __ANY_EXCEPTION_OR_WARNING_OBJECT__ , ExceptionGenericAttrMissing )
+        def ErrorRaiser( self ):
+         pass 
+        --------
 
