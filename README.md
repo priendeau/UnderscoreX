@@ -28,8 +28,7 @@ Documentation
   Is currently lacking, about every method is documented in the source. But future prototype will
   become move and more verbosis and Final realse will include test-case and a lot of documentation.
 
-Example
-=============::
+::
 		Example
 		------------
 		Generic Exception class model:

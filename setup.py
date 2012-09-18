@@ -20,10 +20,47 @@ $Revision: 0.0.1r001a-yusut-bozlon $
 $Date: Mon Sep 10 22:01:31 EDT 2012 $
 Maxiste Deams
 """
-
 import os, sys, re, numpy
 from distutils.core import setup
 import UnderscoreX
+from UnderscoreX import * 
+
+
+
+ActualModuleInformation = dir( )
+
+PackageHandler = open( 'PKG-INFO', 'r+' )
+FileLicenseH = open( 'LICENCE.TXT', 'r+' )
+
+TagSplit=re.compile( r'(?i):' )
+TagReg=re.compile( r'(?i)^[a-z0-9\-]*:' )
+ExceptionTag=[ 'metadata_version', 'license' ]
+InListForTag=[ 'keywords','classifiers','requires','platforms']
+
+
+for Item in PackageHandler.readlines( ):
+    if TagReg.search( Item):
+        TagInfo=TagSplit.split( Item, 1  )
+        TagTransform=TagInfo[0].replace( '-', '_' ).lower()
+        TagContent=TagInfo[1].replace( '\n', '' ) 
+        if TagTransform not in ExceptionTag:
+            if TagTransform in InListForTag:
+                nameListVar='List{}'.format( TagTransform )
+                if not hasattr( __builtins__, nameListVar ):
+                    print "No List present for Item {}".format( nameListVar )
+                    setattr( __builtins__, nameListVar, list() )
+                else:
+                    print "Append {} to Var {}".format( TagContent, nameListVar )
+                    getattr( getattr( __builtins__, nameListVar ), 'append' )( TagContent )
+            else:
+                nameUniqueVar='Unique{}'.format( TagTransform , TagContent)
+                print "Var {} will hold: [ {} ] ".format( nameUniqueVar, TagContent)
+                setattr( __builtins__, 'Unique{}'.format( TagTransform ), TagContent )
+
+for ListTagVar in InListForTag:
+    nameListVar='List{}'.format( ListTagVar )
+    if not hasattr( __builtins__, nameListVar ):
+        setattr( __builtins__, nameListVar, list() )
 
 # from distutils.dep_util import newer
 # from numpy.distutils import log
@@ -56,10 +93,7 @@ if __name__ == "__main__":
         config.add_subpackage('UnderscoreX')
         config = config.todict()
 
-    FileLicenseH = open( 'LICENCE.TXT', 'r+' )
-    ClassifierH = open('classifiers', 'r+')
-    ClassifierField = str( ClassifierH.read() ).split( '\n' )
-
+    
     if 'config' in dir():
         for AddAttr in ListAttr:
             if hasattr( config, AddAttr ):
@@ -72,19 +106,18 @@ if __name__ == "__main__":
             config['author_email']= __author_email__
             config['classifiers'] = ClassifierField
     
-    setup( name=__package__,
-           version=__version__,
-           download_url = "http://pypi.python.org/pypi?:action=files&name={}&version={}".format( __package__ , __version__ ) , 
-           url="http://github.com/priendeau/{}".format( __package__ ),
-           description="This structure is intended for The developper developping pass-thru and conviviable method to intercept attribute on demand.",
+    setup( name=Uniquename,
+           version=Uniqueversion,
+           url=Uniqueurl,
+           description=Uniquedescription,
            license=FileLicenseH.read(),
-           long_description="This structure is intended for The developper developping pass-thru and conviviable method to intercept attribute on demand. By passing information from **kwargs or mutiple-string-chained argument. This allow to build and easy model assuming you had readed the example. It offer a easy chaining method Thru decorator to parse incoming information from **kwargs or any multi-chained string. Once you have defined a correct dictrionary of Attentend Attribute and Messages dedicated to inform the developper.  It contains a mechanism to push into warning or error the missing attribute informaitons. Rather to code individually all the missing attribute and condition, and exception class is provided as example.",
-           keywords = [__package__,'kwargs','Kargs','multi-inline','multi-quoted','string'],
-           classifiers=ClassifierField ,
-           author_email = __author_email__,
-           download_url = 'http://github.com/priendeau/{}'.format( __package__ ),
-           author = __author__,
-           maintainer = 'Maxiste Deams',
-           maintainer_email = 'maxistedeams@gmail.com',
-           requires = [ 'iterpipes', 'sets', 'decimal' ], 
-           platforms = ['Linux', 'Unix', 'Bsd', 'FreeBSD', 'OSX'] )
+           long_description=Uniquelong_description,
+           keywords = Listkeywords,
+           classifiers=Listclassifiers ,
+           author_email = Uniqueauthor_email,
+           download_url = Uniquedownload_url,
+           author = Uniqueauthor,
+           maintainer = Uniquemaintainer,
+           maintainer_email = Uniquemaintainer_email,
+           requires = Listrequires, 
+           platforms = Listplatforms )
