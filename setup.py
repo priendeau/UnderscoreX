@@ -7,7 +7,7 @@ setup.py for installing UnderscoreX
 Usage:
    python setup.py install
 
-Copyright 2011-2012 Maxiste Deams all rights reserved,
+Copyright 2011-2023 Maxiste Deams all rights reserved,
 Maxiste Deams <maxistedeams@gmail.com>
 Permission to use, modify, and distribute this software is given under the
 terms of the New BSD license :
@@ -15,13 +15,15 @@ terms of the New BSD license :
     modification, are permitted provided when fullfiling requirement in
     License.txt, take time to read. 
 
-NO WARRANTY IS EXPRESSED OR IMPLIED.  USE AT YOUR OWN RISK.
-$Revision: 0.0.1r001a-yusut-bozlon $
-$Date: Mon Sep 10 22:01:31 EDT 2012 $
-Maxiste Deams
 """
 import os, sys, re, sets, base64
-from sets import Set
+if sys.version_info < (3,):
+    from sets import Set
+    ### It's built-in set in python 3.x
+else:
+    import io
+    from io import StringIO
+    
 
 try:
     from setuptools import setup, Extension
@@ -30,14 +32,18 @@ except ImportError:
     from distutils.extension import Extension, setup
 
 Base64License           = "CkNvcHlyaWdodCAoYykgMjAwNC0yMDEyLCBNYXhpc3RlIERlYW1zLCBhbGlzIFBhdHJpY2sgUmllbmRlYXUuCkFsbCByaWdodHMgcmVzZXJ2ZWQuCgpSZWRpc3RyaWJ1dGlvbiBhbmQgdXNlIGluIHNvdXJjZSBhbmQgYmluYXJ5IGZvcm1zLCB3aXRoIG9yIHdpdGhvdXQKbW9kaWZpY2F0aW9uLCBhcmUgcGVybWl0dGVkIHByb3ZpZGVkIHRoYXQgdGhlIGZvbGxvd2luZyBjb25kaXRpb25zIGFyZSBtZXQ6CiAgICAqIFJlZGlzdHJpYnV0aW9ucyBvZiBzb3VyY2UgY29kZSBtdXN0IHJldGFpbiB0aGUgYWJvdmUgY29weXJpZ2h0CiAgICAgIG5vdGljZSwgdGhpcyBsaXN0IG9mIGNvbmRpdGlvbnMgYW5kIHRoZSBmb2xsb3dpbmcgZGlzY2xhaW1lci4KICAgICogUmVkaXN0cmlidXRpb25zIGluIGJpbmFyeSBmb3JtIG11c3QgcmVwcm9kdWNlIHRoZSBhYm92ZSBjb3B5cmlnaHQKICAgICAgbm90aWNlLCB0aGlzIGxpc3Qgb2YgY29uZGl0aW9ucyBhbmQgdGhlIGZvbGxvd2luZyBkaXNjbGFpbWVyIGluIHRoZQogICAgICBkb2N1bWVudGF0aW9uIGFuZC9vciBvdGhlciBtYXRlcmlhbHMgcHJvdmlkZWQgd2l0aCB0aGUgZGlzdHJpYnV0aW9uLgogICAgKiBOZWl0aGVyIHRoZSBuYW1lIG9mIHRoZSA8b3JnYW5pemF0aW9uPiBub3IgdGhlCiAgICAgIG5hbWVzIG9mIGl0cyBjb250cmlidXRvcnMgbWF5IGJlIHVzZWQgdG8gZW5kb3JzZSBvciBwcm9tb3RlIHByb2R1Y3RzCiAgICAgIGRlcml2ZWQgZnJvbSB0aGlzIHNvZnR3YXJlIHdpdGhvdXQgc3BlY2lmaWMgcHJpb3Igd3JpdHRlbiBwZXJtaXNzaW9uLgoKVEhJUyBTT0ZUV0FSRSBJUyBQUk9WSURFRCBCWSBUSEUgQ09QWVJJR0hUIEhPTERFUlMgQU5EIENPTlRSSUJVVE9SUyAiQVMgSVMiIEFORApBTlkgRVhQUkVTUyBPUiBJTVBMSUVEIFdBUlJBTlRJRVMsIElOQ0xVRElORywgQlVUIE5PVCBMSU1JVEVEIFRPLCBUSEUgSU1QTElFRApXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJTElUWSBBTkQgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQVJFCkRJU0NMQUlNRUQuIElOIE5PIEVWRU5UIFNIQUxMIDxDT1BZUklHSFQgSE9MREVSPiBCRSBMSUFCTEUgRk9SIEFOWQpESVJFQ1QsIElORElSRUNULCBJTkNJREVOVEFMLCBTUEVDSUFMLCBFWEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwgREFNQUdFUwooSU5DTFVESU5HLCBCVVQgTk9UIExJTUlURUQgVE8sIFBST0NVUkVNRU5UIE9GIFNVQlNUSVRVVEUgR09PRFMgT1IgU0VSVklDRVM7CkxPU1MgT0YgVVNFLCBEQVRBLCBPUiBQUk9GSVRTOyBPUiBCVVNJTkVTUyBJTlRFUlJVUFRJT04pIEhPV0VWRVIgQ0FVU0VEIEFORApPTiBBTlkgVEhFT1JZIE9GIExJQUJJTElUWSwgV0hFVEhFUiBJTiBDT05UUkFDVCwgU1RSSUNUIExJQUJJTElUWSwgT1IgVE9SVAooSU5DTFVESU5HIE5FR0xJR0VOQ0UgT1IgT1RIRVJXSVNFKSBBUklTSU5HIElOIEFOWSBXQVkgT1VUIE9GIFRIRSBVU0UgT0YgVEhJUwpTT0ZUV0FSRSwgRVZFTiBJRiBBRFZJU0VEIE9GIFRIRSBQT1NTSUJJTElUWSBPRiBTVUNIIERBTUFHRS4K"
-LicenseDecoded          = base64.b64decode( Base64License )
+if sys.version_info.major < 3 :
+    LicenseDecoded          = base64.b64decode( cStringIO.StringIO( Base64License ).read() )
+else:
+    LicenseDecoded          = base64.b64decode( StringIO( Base64License ).read() )
+    
 ActualModuleInformation = dir( )
 
 PackageHandler          = open( 'PKG-INFO', 'r+' )
 PackagesRequires        = open( 'requires_modules', 'r+')
 FileLicenseH            = open( 'LICENCE.TXT', 'w+' )
 
-FileLicenseH.write( LicenseDecoded )
+FileLicenseH.write( str(LicenseDecoded ) )
 FileLicenseH.close() 
 
 TagSplit=re.compile( r'(?i):' )
@@ -110,30 +116,35 @@ for Item in PackageHandler.readlines( ):
             if TagTransform in TypeAttrFormat['list']['member']:
                 nameListVar=TypeAttrFormat['list']['name'].format( TagTransform )
                 if not hasattr( __builtins__, nameListVar ):
-                    print "No List present for Item {}".format( nameListVar )
+                    print( "No List present for Item %s" % ( nameListVar ) ) 
                     setattr( __builtins__, nameListVar, getattr( __builtins__, TypeAttrFormat['list']['format'] )() )
                 else:
-                    print "Append {} to Var {}".format( TagContent, nameListVar )
+                    print( "Append %s to Var %s" % ( TagContent, nameListVar ) ) 
                     getattr( getattr( __builtins__, nameListVar ), 'append' )( TagContent )
             else:
                 nameUniqueVar=TypeAttrFormat['str']['name'].format( TagTransform )
-                print "Var {} will hold: [ {} ] ".format( nameUniqueVar, TagContent)
+                print("Var %s will hold: [ %s ] " % ( nameUniqueVar, TagContent)) 
                 setattr( __builtins__, TypeAttrFormat['str']['name'].format( TagTransform ), TagContent )
 
-print "Resolved Tag: {}".format( ResolvedPkgInfoTag )
+print( "Resolved Tag: %s" % ( ResolvedPkgInfoTag ) ) 
 PackageHandler.close()
 
-AttrSetListParsed       =   Set( ResolvedPkgInfoTag  )
-AttrSetFromRequired     =   Set( RequiredTag )
-AttrSetFromList         =   Set( TypeAttrFormat['list']['member'] )
-
+if sys.version_info < (3,):
+    AttrSetListParsed       =   Set( ResolvedPkgInfoTag  )
+    AttrSetFromRequired     =   Set( RequiredTag )
+    AttrSetFromList         =   Set( TypeAttrFormat['list']['member'] )
+else:
+    AttrSetListParsed       =   set( ResolvedPkgInfoTag  )
+    AttrSetFromRequired     =   set( RequiredTag )
+    AttrSetFromList         =   set( TypeAttrFormat['list']['member'] )
+    
 MissingAttrSet          =   getattr( AttrSetFromRequired, 'difference')( AttrSetListParsed )
 MissingAttrFromList     =   getattr( AttrSetFromList    , 'difference')( AttrSetListParsed )
 
 
 ### Using sets.Set to extract easily missing tag from required field and will
 ### verify ones inside member or required and will create it .
-print "Detected Missing Attribute: {}\n\tFrom List attribute field {}".format( MissingAttrSet, MissingAttrFromList )
+print( "Detected Missing Attribute: %s\n\tFrom List attribute field %s" % ( MissingAttrSet, MissingAttrFromList ) ) 
 if len( MissingAttrSet ) > 0 :
     for ItemAttrMissing in MissingAttrSet:
         if ItemAttrMissing in MissingAttrFromList:
@@ -144,6 +155,26 @@ if len( MissingAttrSet ) > 0 :
         
         
 UseNumpyDistutilsConfiguration = False
+
+def ListFileInstallByExclusion( listReglarExprExclusion ):
+    import re
+    listRe = list()
+    returnList=list() 
+    for itemReCp in listReglarExprExclusion:
+        listRe.append( re.compile(itemReCp) )
+    awalk=os.walk( './' )
+    for root, dirs, files in awalk :
+        for item in files :
+            fetcName = "%s/%s" % ( root,item)
+            statusMatch=False
+            for reMatchItem in listRe:
+                if reMatchItem.match( fetcName ):
+                  statusMatch=True
+                  print("\tFound match in string[%s]" % reMatchItem.match( fetcName ) )
+            if statusMatch is False:
+                returnList.append( fetcName )
+              #print( fetcName )
+    return returnList
 
 
 def configuration( PackageName ):
@@ -204,7 +235,9 @@ if __name__ == "__main__":
                                  "LICENCE.TXT",
                                  "requires.txt",
                                  "requires_modules",
-                                 "UnderscoreX.py"]},
+                                 "UnderscoreX.py",
+                                 "UnderscoreX/BluetoothK6/Connection.py",
+                                 "UnderscoreX/BluetoothK6/__init__.py"]},
             include_package_data=   True,
             install_requires    =   ListRequires )
 
